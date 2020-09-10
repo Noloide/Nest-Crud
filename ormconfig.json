@@ -4,7 +4,7 @@
   "port": 3306,
   "username": "devel",
   "password": "devel",
-  "database": "development",
+  "database": "nest-crud",
   "entities": ["dist/**/*.entity{.ts,.js}"],
   "synchronize": true
 }

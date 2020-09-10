@@ -6,11 +6,20 @@ export class Book {
   id: number;
 
   @Column()
-  title: string;
+  username: string;
 
   @Column()
-  publishing_year: number;
+  password: string;
 
   @Column()
-  author: string;
+  firstName: string;
+
+  @Column()
+  lastName: string;
+
+  @Column()
+  age: number;
+
+  @Column()
+  gender: string;
 }

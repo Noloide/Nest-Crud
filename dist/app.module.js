@@ -21,6 +21,8 @@ const typeorm_2 = require("typeorm");
 const book_entity_1 = require("./books/entities/book.entity");
 const users_controller_1 = require("./users/users.controller");
 const users_service_1 = require("./users/users.service");
+const users_module_1 = require("./users/users.module");
+const user_entity_1 = require("./users/entities/user.entity");
 let AppModule = class AppModule {
     constructor(connection) {
         this.connection = connection;
@@ -28,7 +30,11 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
-        imports: [books_module_1.BooksModule, typeorm_1.TypeOrmModule.forRoot({ entities: [book_entity_1.Book] })],
+        imports: [
+            books_module_1.BooksModule,
+            typeorm_1.TypeOrmModule.forRoot({ entities: [book_entity_1.Book, user_entity_1.User] }),
+            users_module_1.UsersModule,
+        ],
         controllers: [app_controller_1.AppController, books_controller_1.BooksController, users_controller_1.UsersController],
         providers: [app_service_1.AppService, books_service_1.BooksService, users_service_1.UsersService],
     }),

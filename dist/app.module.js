@@ -23,6 +23,7 @@ const users_controller_1 = require("./users/users.controller");
 const users_service_1 = require("./users/users.service");
 const users_module_1 = require("./users/users.module");
 const user_entity_1 = require("./users/entities/user.entity");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
     constructor(connection) {
         this.connection = connection;
@@ -34,6 +35,7 @@ AppModule = __decorate([
             books_module_1.BooksModule,
             typeorm_1.TypeOrmModule.forRoot({ entities: [book_entity_1.Book, user_entity_1.User] }),
             users_module_1.UsersModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [app_controller_1.AppController, books_controller_1.BooksController, users_controller_1.UsersController],
         providers: [app_service_1.AppService, books_service_1.BooksService, users_service_1.UsersService],

@@ -20,9 +20,9 @@ export class UsersController {
     return this.usersService.getAll();
   }
 
-  @Get(':id')
-  findOneUser(@Param('id') id): Promise<User> {
-    return this.usersService.findOneUser(id);
+  @Get(':username')
+  findOneUser(@Param('username') username): Promise<User> {
+    return this.usersService.findOneUser(username);
   }
 
   @Post()

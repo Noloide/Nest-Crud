@@ -16,6 +16,7 @@ exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const create_user_dto_1 = require("./dto/create-user.dto");
 const users_service_1 = require("./users.service");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
@@ -24,7 +25,7 @@ let UsersController = class UsersController {
         return this.usersService.getAll();
     }
     findOneUser(username) {
-        return this.usersService.findOneUser(username);
+        return this.usersService.findOne(username);
     }
     createUser(createUserDto) {
         return this.usersService.createUser(createUserDto);
@@ -37,12 +38,14 @@ let UsersController = class UsersController {
     }
 };
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getAll", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get(':username'),
     __param(0, common_1.Param('username')),
     __metadata("design:type", Function),
@@ -50,6 +53,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "findOneUser", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Post(),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -57,6 +61,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "createUser", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Delete(':id'),
     __param(0, common_1.Param('id')),
     __metadata("design:type", Function),
@@ -64,6 +69,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "deleteUser", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Put(':id'),
     __param(0, common_1.Body()),
     __param(1, common_1.Param('id')),

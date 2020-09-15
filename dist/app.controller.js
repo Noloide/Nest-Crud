@@ -14,25 +14,34 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
+const local_auth_guard_1 = require("./auth/local-auth.guard");
 const jwt_auth_guard_1 = require("./auth/jwt-auth.guard");
-const app_service_1 = require("./app.service");
-const passport_1 = require("@nestjs/passport");
+const auth_service_1 = require("./auth/auth.service");
 let AppController = class AppController {
-    constructor(appService) {
-        this.appService = appService;
+    constructor(authService) {
+        this.authService = authService;
     }
     async login(req) {
-        return req.user;
+        return this.authService.login(req.user);
     }
-    getBook(req) {
+    getBooks(req) {
         return req.books;
     }
-    getUser(req) {
-        return req.user;
+    getBooksBy(req) {
+        return req.books;
+    }
+    createBooks(req) {
+        return req.books;
+    }
+    deleteBooks(req) {
+        return req.books;
+    }
+    updateBooks(req) {
+        return req.books;
     }
 };
 __decorate([
-    common_1.UseGuards(passport_1.AuthGuard('jwt')),
+    common_1.UseGuards(local_auth_guard_1.LocalAuthGuard),
     common_1.Post('auth/login'),
     __param(0, common_1.Request()),
     __metadata("design:type", Function),
@@ -46,18 +55,42 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], AppController.prototype, "getBook", null);
+], AppController.prototype, "getBooks", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
-    common_1.Get('users'),
+    common_1.Get('books/*'),
     __param(0, common_1.Request()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], AppController.prototype, "getUser", null);
+], AppController.prototype, "getBooksBy", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('books'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "createBooks", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Delete('books/*'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "deleteBooks", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Put('books/*'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "updateBooks", null);
 AppController = __decorate([
     common_1.Controller(),
-    __metadata("design:paramtypes", [app_service_1.AppService])
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
 ], AppController);
 exports.AppController = AppController;
 //# sourceMappingURL=app.controller.js.map

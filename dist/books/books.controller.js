@@ -16,6 +16,7 @@ exports.BooksController = void 0;
 const common_1 = require("@nestjs/common");
 const create_book_dto_1 = require("./dto/create-book.dto");
 const books_service_1 = require("./books.service");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 let BooksController = class BooksController {
     constructor(booksService) {
         this.booksService = booksService;
@@ -37,12 +38,14 @@ let BooksController = class BooksController {
     }
 };
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], BooksController.prototype, "getAll", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get(':id'),
     __param(0, common_1.Param('id')),
     __metadata("design:type", Function),
@@ -50,6 +53,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BooksController.prototype, "findOneBook", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Post(),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -57,6 +61,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BooksController.prototype, "createBook", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Delete(':id'),
     __param(0, common_1.Param('id')),
     __metadata("design:type", Function),
@@ -64,6 +69,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BooksController.prototype, "deleteBook", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Put(':id'),
     __param(0, common_1.Body()),
     __param(1, common_1.Param('id')),

@@ -1,27 +1,53 @@
-import { Controller, Get, Request, Post, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Request,
+  Post,
+  UseGuards,
+  Delete,
+  Put,
+} from '@nestjs/common';
+import { LocalAuthGuard } from './auth/local-auth.guard';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
-import { AppService } from './app.service';
-import { AuthGuard } from '@nestjs/passport';
+import { AuthService } from './auth/auth.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private authService: AuthService) {}
 
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
-    return req.user;
+    return this.authService.login(req.user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('books')
-  getBook(@Request() req) {
+  getBooks(@Request() req) {
     return req.books;
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('users')
-  getUser(@Request() req) {
-    return req.user;
+  @Get('books/*')
+  getBooksBy(@Request() req) {
+    return req.books;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('books')
+  createBooks(@Request() req) {
+    return req.books;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('books/*')
+  deleteBooks(@Request() req) {
+    return req.books;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put('books/*')
+  updateBooks(@Request() req) {
+    return req.books;
   }
 }
